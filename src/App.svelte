@@ -1,13 +1,23 @@
 <script>
+	import NavBar from "./components/NavBar.svelte";
+	import TailwindStyles from "./components/TailwindStyles.svelte";
+
 	export let name;
 </script>
+
+<NavBar />
 
 <main>
 	<h1>Hello {name}!</h1>
 	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<p class="bg-green-500">Testing 123</p>
+	<p class="test">Testing again</p>
 </main>
 
 <style>
+	.test {
+		@apply bg-orange-500;
+	}
 	main {
 		text-align: center;
 		padding: 1em;
