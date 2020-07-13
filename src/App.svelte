@@ -1,30 +1,31 @@
 <script>
   import { FirebaseApp, User, Doc, Collection } from "sveltefire";
+  import Router, { link } from 'svelte-spa-router'
 
   import firebase from "./firebase.js";
   import NavBar from "./components/NavBar.svelte";
   import TailwindStyles from "./components/TailwindStyles.svelte";
+
+  import Home from "./routes/Home.svelte";
+  import Quizzes from "./routes/Quizzes.svelte";
+
+  let routes = {
+    "/": Home,
+    "/quizzes": Quizzes,
+  };
 </script>
 
 <style>
-  
+
 </style>
 
 <FirebaseApp {firebase}>
 
-  <User let:user>
+  <NavBar />
 
-    <p>Howdy, {user.uid}</p>
+  <a href="/" use:link>Home</a>
+  <a href="/quizzes" use:link>Quizzes</a>
 
-    <!-- 4. 💬 Get all the comments in its subcollection -->
-    <Collection path={'quizzes'} let:data={quizzes}>
-      {#each quizzes as quiz}
-        <p>{quiz.title}</p>
-      {/each}
-    </Collection>
-
-  </User>
+  <Router {routes} />
 
 </FirebaseApp>
-
-<NavBar />

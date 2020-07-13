@@ -6,6 +6,7 @@ import { terser } from "rollup-plugin-terser";
 import sveltePreprocess from "svelte-preprocess";
 import { config } from "dotenv";
 import replace from "@rollup/plugin-replace";
+import alias from "@rollup/plugin-alias";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -57,6 +58,11 @@ export default {
           measurementId: process.env.FIREBASE_MEASUREMENT_ID,
         },
       }),
+    }),
+
+    // Import relative to the srcs dir.
+    alias({
+      entries: [{ find: "src", replacement: "./src" }],
     }),
 
     // In dev mode, call `npm run start` once
